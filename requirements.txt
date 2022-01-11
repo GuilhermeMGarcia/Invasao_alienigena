@@ -3,5 +3,6 @@ distlib==0.3.3
 filelock==3.3.2
 mp3play==0.1.15
 platformdirs==2.4.0
+pygame==2.1.2
 six==1.16.0
 virtualenv==20.10.0
