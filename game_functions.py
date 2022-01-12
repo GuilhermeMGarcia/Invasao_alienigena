@@ -3,12 +3,16 @@ import sys
 import pygame
 
 
-def check_events():
+def check_events(ship):
     """Responde a eventos de pressionamento de teclas e de mouse."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
 
+        elif event.type == pygame.KEYDOWN:
+            if event.type == pygame.K_RIGHT:
+                # Move a espaçonave para a direita
+                ship.rect.centerx += 1
 
 def update_screen(ai_settings, screen, ship):
     """Atualiza as imagens na tela e alterna para a nova tela."""
