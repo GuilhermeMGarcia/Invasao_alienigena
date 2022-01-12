@@ -17,4 +17,4 @@ class Ship():
 
     def blitme(self):
         """Desenha a espaçonave em sua posiçao atual"""
-        self.screen.blit(self.screen_rect.bottom)
+        self.screen.blit(self.image, self.rect)
