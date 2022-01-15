@@ -8,18 +8,10 @@ def check_events(ship):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_d:
-                ship.moving_right = True
-            elif event.key == pygame.K_a:
-                ship.moving_left = True
-
+            check_keydown_events(event, ship)
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_d:
-                ship.moving_right = False
-            elif event.key == pygame.K_a:
-                ship.moving_left = False
+            check_keyup_events(event, ship)
 
 def update_screen(ai_settings, screen, ship):
     """Atualiza as imagens na tela e alterna para a nova tela."""
@@ -29,3 +21,17 @@ def update_screen(ai_settings, screen, ship):
 
     # Deixa a tela mais recente visivel
     pygame.display.flip()
+
+def check_keydown_events(event, ship):
+    """Responde a pressionamento de tecla."""
+    if event.key == pygame.K_d:
+        ship.moving_right = True
+    elif event.key == pygame.K_a:
+        ship.moving_left = True
+
+def check_keyup_events(event, ship):
+    """Responde a solturas de tecla."""
+    if event.key == pygame.K_d:
+        ship.moving_right = False
+    elif event.key == pygame.K_a:
+        ship.moving_left = False
