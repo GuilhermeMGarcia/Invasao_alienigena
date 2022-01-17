@@ -1,6 +1,7 @@
 import sys
-
 import pygame
+
+from bullet import Bullet
 
 
 def check_events(ship):
