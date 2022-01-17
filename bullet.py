@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 
+
 class Bullet(Sprite):
     """Uma classe que administra projeteis disparados pela espaçonave"""
 
@@ -12,7 +13,7 @@ class Bullet(Sprite):
         # Cria um retangulo para o projetil em (0, 0) e, em seguida, define a
         # posiçao correta
         self.rect = pygame.Rect(0, 0, ai_settings.bullet_width,
-                                ai_settings.bullet_heigth)
+                                ai_settings.bullet_height)
         self.rect.centerx = ship.rect.centerx
         self.rect.top = ship.rect.top
 
