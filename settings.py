@@ -5,7 +5,7 @@ class Settings():
         """Inicializa as configuraçoes do jogo."""
         # Configuraçoes da tela
         self.screen_width = 1200
-        self.screen_height = 700
+        self.screen_height = 680
         self.bg_color = (230, 230, 230)
 
         # Configuraçao da espaçonave
