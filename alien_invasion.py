@@ -3,7 +3,9 @@ from pygame.sprite import Group
 
 from settings import Settings
 from ship import Ship
+from alien import Alien
 import game_functions as gf
+
 
 def run_game():
     # Inicializa o pygame, as configuraçoes e o objeto screen
@@ -15,8 +17,13 @@ def run_game():
 
     #Cria uma espaçonave
     ship = Ship(ai_settings, screen)
+
     # Cria um grupo no qual serao armazenados os projeteis
     bullets = Group()
+
+    # Cria um alienigena
+    alien = Alien(ai_settings, screen)
+
     # Define a cor de fundo
     bg_color = (230, 230, 230)
 
@@ -26,6 +33,6 @@ def run_game():
         ship.update()
         bullets.update()
         gf.update_bullets(bullets)
-        gf.update_screen(ai_settings, screen, ship, bullets)
+        gf.update_screen(ai_settings, screen, ship, alien, bullets)
 
 run_game()
