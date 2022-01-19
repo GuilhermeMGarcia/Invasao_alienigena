@@ -11,10 +11,7 @@ def check_keydown_events(event,ai_settings, screen, ship, bullets):
     elif event.key == pygame.K_a:
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
-        # Cria um novo projetil e o adiciona ao grupo de projeteis
-        if len(bullets) < ai_settings.bullets_allowed:
-            new_bullet = Bullet(ai_settings, screen, ship)
-            bullets.add(new_bullet)
+        fire_bullet(ai_settings, screen, ship, bullets)
 
 
 def check_keyup_events(event, ship):
@@ -48,6 +45,7 @@ def update_screen(ai_settings, screen, ship, bullets):
     # Deixa a tela mais recente visivel
     pygame.display.flip()
 
+
 def update_bullets(bullets):
     """Atualiza a posiçao dos projeteis e se livra dos projeteis antigo."""
     # Atualiza as posiçoes dos projeteis
@@ -58,3 +56,10 @@ def update_bullets(bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
+
+def fire_bullet(ai_settings, screen, ship, bullets):
+    """Dispara um projetil se o limite ainda nao foi alcançado."""
+    # Cria um novo projetil e o adiciona ao grupo de projeteis
+    if len(bullets) < ai_settings.bullets_allowed:
+        new_bullet = Bullet(ai_settings, screen, ship)
+        bullets.add(new_bullet)
