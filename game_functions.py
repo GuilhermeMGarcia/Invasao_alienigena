@@ -40,6 +40,8 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
     """Atualiza as imagens na tela e alterna para a nova tela."""
     # Redesenha a tela a cada passagem pelo laço
     screen.fill(ai_settings.bg_color)
+    bg = pygame.image.load(ai_settings.image)
+    screen.blit(bg, (0, 0))
 
     # Redesenha todos os projeteis atras da espaçonave e dos alienigenas
     for bullet in bullets.sprites():
