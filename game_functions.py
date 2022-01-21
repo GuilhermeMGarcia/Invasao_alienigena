@@ -68,6 +68,8 @@ def fire_bullet(ai_settings, screen, ship, bullets):
     """Dispara um projetil se o limite ainda nao foi alcançado."""
     # Cria um novo projetil e o adiciona ao grupo de projeteis
     if len(bullets) < ai_settings.bullets_allowed:
+        pygame.mixer.music.load(ai_settings.sound)
+        pygame.mixer.music.play()
         new_bullet = Bullet(ai_settings, screen, ship)
         bullets.add(new_bullet)
 

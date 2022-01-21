@@ -18,6 +18,7 @@ class Settings():
         self.bullet_height = 15
         self.bullet_color = (60, 60, 60)
         self.bullets_allowed = 3
+        self.sound = "sound/sounds_shoot.wav"
 
         # Configuraçao dos alienigena
         self.alien_speed_factor = 1
