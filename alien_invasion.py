@@ -25,8 +25,6 @@ def run_game():
     # Cria a frota de alienigena
     gf.create_fleet(ai_settings, screen, ship, aliens)
 
-    # Define a cor de fundo
-    bg_color = (230, 230, 230)
 
     # Inicializa um laço principal do jogo
     while True:
@@ -34,6 +32,7 @@ def run_game():
         ship.update()
         bullets.update()
         gf.update_bullets(bullets)
+        gf.update_aliens(aliens)
         gf.update_screen(ai_settings, screen, ship, aliens, bullets)
 
 run_game()

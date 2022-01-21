@@ -84,6 +84,7 @@ def get_numbers_rows(ai_settings, ship_height, alien_height):
     numbers_rows = int(available_space_y /(2 * alien_height))
     return numbers_rows
 
+
 def create_alien(ai_settings, screen, aliens, alien_number, row_number):
     # Cria um alienigena e o posiciona na linha
     alien = Alien(ai_settings, screen)
@@ -108,3 +109,7 @@ def create_fleet(ai_settings, screen, ship, aliens):
             create_alien(ai_settings, screen, aliens, alien_number,
                          row_number)
 
+
+def update_aliens(aliens):
+    """Atualiza as posiçoes de todos os alienigenas da frota."""
+    aliens.update()
