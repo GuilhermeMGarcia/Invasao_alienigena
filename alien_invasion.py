@@ -21,18 +21,22 @@ def run_game():
     bullets = Group()
     aliens = Group()
 
-
     # Cria a frota de alienigena
     gf.create_fleet(ai_settings, screen, ship, aliens)
 
+    # Tela de fundo
+    bg = pygame.image.load(ai_settings.image)
+
+    # Son de tiro nave
+    son = pygame.mixer.music.load(ai_settings.sound)
 
     # Inicializa um laço principal do jogo
     while True:
-        gf.check_events(ai_settings, screen, ship, bullets)
+        gf.check_events(ai_settings, screen, ship, bullets, son)
         ship.update()
         bullets.update()
-        gf.update_bullets(bullets)
+        gf.update_bullets(aliens, bullets)
         gf.update_aliens(ai_settings, aliens)
-        gf.update_screen(ai_settings, screen, ship, aliens, bullets)
+        gf.update_screen(ai_settings, screen, ship, aliens, bullets, bg)
 
 run_game()

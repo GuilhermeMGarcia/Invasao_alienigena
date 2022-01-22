@@ -5,14 +5,14 @@ from bullet import Bullet
 from alien import Alien
 
 
-def check_keydown_events(event,ai_settings, screen, ship, bullets):
+def check_keydown_events(event,ai_settings, screen, ship, bullets, son):
     """Responde a pressionamento de tecla."""
     if event.key == pygame.K_d:
         ship.moving_right = True
     elif event.key == pygame.K_a:
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
-        fire_bullet(ai_settings, screen, ship, bullets)
+        fire_bullet(ai_settings, screen, ship, bullets, son)
 
 
 def check_keyup_events(event, ship):
@@ -25,22 +25,21 @@ def check_keyup_events(event, ship):
         sys.exit()
 
 
-def check_events(ai_settings, screen, ship, bullets):
+def check_events(ai_settings, screen, ship, bullets, son):
     """Responde a eventos de pressionamento de teclas e de mouse."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, screen, ship, bullets)
+            check_keydown_events(event, ai_settings, screen, ship, bullets, son)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
 
-def update_screen(ai_settings, screen, ship, aliens, bullets):
+def update_screen(ai_settings, screen, ship, aliens, bullets, bg):
     """Atualiza as imagens na tela e alterna para a nova tela."""
     # Redesenha a tela a cada passagem pelo laço
     screen.fill(ai_settings.bg_color)
-    bg = pygame.image.load(ai_settings.image)
     screen.blit(bg, (0, 0))
 
     # Redesenha todos os projeteis atras da espaçonave e dos alienigenas
@@ -53,7 +52,7 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
     pygame.display.flip()
 
 
-def update_bullets(bullets):
+def update_bullets(aliens, bullets):
     """Atualiza a posiçao dos projeteis e se livra dos projeteis antigo."""
     # Atualiza as posiçoes dos projeteis
     bullets.update()
@@ -63,12 +62,15 @@ def update_bullets(bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
+    # Verifica se algum projetil antingiu os alienigenas
+    # Em caso afirmativo, livra-se do projetil e do alienigena
+    collisons = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
-def fire_bullet(ai_settings, screen, ship, bullets):
+
+def fire_bullet(ai_settings, screen, ship, bullets, *args):
     """Dispara um projetil se o limite ainda nao foi alcançado."""
     # Cria um novo projetil e o adiciona ao grupo de projeteis
     if len(bullets) < ai_settings.bullets_allowed:
-        pygame.mixer.music.load(ai_settings.sound)
         pygame.mixer.music.play()
         new_bullet = Bullet(ai_settings, screen, ship)
         bullets.add(new_bullet)
