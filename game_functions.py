@@ -5,14 +5,14 @@ from bullet import Bullet
 from alien import Alien
 
 
-def check_keydown_events(event,ai_settings, screen, ship, bullets, son):
+def check_keydown_events(event,ai_settings, screen, ship, bullets):
     """Responde a pressionamento de tecla."""
     if event.key == pygame.K_d:
         ship.moving_right = True
     elif event.key == pygame.K_a:
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
-        fire_bullet(ai_settings, screen, ship, bullets, son)
+        fire_bullet(ai_settings, screen, ship, bullets)
 
 
 def check_keyup_events(event, ship):
@@ -25,13 +25,13 @@ def check_keyup_events(event, ship):
         sys.exit()
 
 
-def check_events(ai_settings, screen, ship, bullets, son):
+def check_events(ai_settings, screen, ship, bullets):
     """Responde a eventos de pressionamento de teclas e de mouse."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, screen, ship, bullets, son)
+            check_keydown_events(event, ai_settings, screen, ship, bullets)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
@@ -52,7 +52,7 @@ def update_screen(ai_settings, screen, ship, aliens, bullets, bg):
     pygame.display.flip()
 
 
-def update_bullets(aliens, bullets):
+def update_bullets(ai_settings, aliens, bullets):
     """Atualiza a posiçao dos projeteis e se livra dos projeteis antigo."""
     # Atualiza as posiçoes dos projeteis
     bullets.update()
@@ -66,14 +66,20 @@ def update_bullets(aliens, bullets):
     # Em caso afirmativo, livra-se do projetil e do alienigena
     collisons = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
+    # Em caso afirmativo, carrega-ra um som de explosao
+    if collisons:
+        son_explosion(ai_settings.sound_explosion)
 
-def fire_bullet(ai_settings, screen, ship, bullets, *args):
+
+def fire_bullet(ai_settings, screen, ship, bullets):
     """Dispara um projetil se o limite ainda nao foi alcançado."""
     # Cria um novo projetil e o adiciona ao grupo de projeteis
     if len(bullets) < ai_settings.bullets_allowed:
-        pygame.mixer.music.play()
         new_bullet = Bullet(ai_settings, screen, ship)
-        bullets.add(new_bullet)
+        # Em caso afirmativo carrega-ra um som de tiro
+        if new_bullet:
+            son_bullet(ai_settings.sound)
+            bullets.add(new_bullet)
 
 
 def get_number_aliens_x(ai_settings, alien_width):
@@ -138,3 +144,15 @@ def update_aliens(ai_settings, aliens):
     """
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
+
+
+def son_bullet(son):
+    """Carrega um son de tiro para nave"""
+    pygame.mixer.music.load(son)
+    pygame.mixer.music.play()
+
+
+def son_explosion(son):
+    """Carrega um son de explosao para nave alienigena"""
+    pygame.mixer.music.load(son)
+    pygame.mixer.music.play()
