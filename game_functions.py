@@ -52,7 +52,7 @@ def update_screen(ai_settings, screen, ship, aliens, bullets, bg):
     pygame.display.flip()
 
 
-def update_bullets(ai_settings, aliens, bullets):
+def update_bullets(ai_settings,screen, ship, aliens, bullets):
     """Atualiza a posiçao dos projeteis e se livra dos projeteis antigo."""
     # Atualiza as posiçoes dos projeteis
     bullets.update()
@@ -69,6 +69,11 @@ def update_bullets(ai_settings, aliens, bullets):
     # Em caso afirmativo, carrega-ra um som de explosao
     if collisons:
         son_explosion(ai_settings.sound_explosion)
+
+    if len(aliens) == 0:
+        # Destroi os projeteis existentes e cria uma nova frota
+        bullets.empty()
+        create_fleet(ai_settings, screen, ship, aliens)
 
 
 def fire_bullet(ai_settings, screen, ship, bullets):
