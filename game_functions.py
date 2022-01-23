@@ -163,6 +163,16 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
     sleep(0.5)
 
 
+def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
+    """Verifica se algum alienigena alcançou a parte inferior da tela."""
+    screen_rect = screen.get_rect()
+    for alien in aliens.sprites():
+        if alien.rect.bottom >= screen_rect.bottom:
+            # Trata esse caso do mesmo modo que e feito quando a espaçonave e atingida
+            ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
+            break
+
+
 def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
     """
     Verifica se a frota esta em uma das bordas
@@ -174,6 +184,9 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
     # Verifica se houve colisoes entre alienigenas e a espaçonave
     if pygame.sprite.spritecollideany(ship, aliens):
         ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
+
+    # Verifica se ha algum alienigena que atingiu a parte inferior da tela
+    check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
 
 
 def son_bullet(son):
