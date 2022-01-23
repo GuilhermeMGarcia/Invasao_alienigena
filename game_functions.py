@@ -62,8 +62,12 @@ def update_bullets(ai_settings,screen, ship, aliens, bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-    # Verifica se algum projetil antingiu os alienigenas
-    # Em caso afirmativo, livra-se do projetil e do alienigena
+    check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets)
+
+
+def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
+    """Responde a colisoes entre porjeteis e alienigenas."""
+    # Remove qualquer projetil e alienigena que tenham colidido
     collisons = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
     # Em caso afirmativo, carrega-ra um som de explosao
