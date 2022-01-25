@@ -9,7 +9,7 @@ class Button():
 
         # Define as dimensoes e as propriedades do botao
         self.width, self.height = 200, 50
-        self.button_color = (0, 255, 0)
+        self.button_color = (70, 42, 40)
         self.text_color = (255, 255, 255)
         self.font = pygame.font.SysFont(None, 48)
 
@@ -31,3 +31,4 @@ class Button():
         #  Desenha um botao em branco e, em seguida, desenha a mensagem
         self.screen.fill(self.button_color, self.rect)
         self.screen.blit(self.msg_image, self.msg_image_rect)
+
