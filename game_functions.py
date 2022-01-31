@@ -105,13 +105,14 @@ def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
 def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """Responde a colisoes entre porjeteis e alienigenas."""
     # Remove qualquer projetil e alienigena que tenham colidido
-    collisons = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
     # Em caso afirmativo, carrega-ra um som de explosao
-    if collisons:
+    if collisions:
         son_explosion(ai_settings.sound_explosion)
-        stats.score += ai_settings.alien_points
-        sb.prep_score()
+        for aliens in collisions.values():
+            stats.score += ai_settings.alien_points * len(aliens)
+            sb.prep_score()
 
     if len(aliens) == 0:
         # Destroi os projeteis existentes e cria uma nova frota
