@@ -41,7 +41,7 @@ class Settings():
         self.fleet_direction = 1
 
         # Pontuaçao
-        self.alien_points = 500
+        self.alien_points = 50
 
     def increase_speed(self):
         """Aumenta as configuraçoes de velocidade e os pontos para cada alienigena."""

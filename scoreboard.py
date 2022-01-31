@@ -17,12 +17,26 @@ class Scoreboard():
 
         # Prepara a imagem da pontuaçao inicial
         self.prep_score()
+        self.prep_high_score()
+
+    def prep_high_score(self):
+        """Transforma a pontuaçao maxima em uma imagem renderiada."""
+        high_score = int(round(self.stats.score, -1))
+        high_score_str = f"{high_score:,}"
+        self.high_score_image = self.font.render(high_score_str, True,
+                                            self.text_color, self.ai_settings.bg_color)
+
+        #Centraliza a pontuaçao maxima na parte superior da tela
+        self.high_score_rect = self.high_score_image.get_rect()
+        self.high_score_rect.centerx = self.high_score_rect.centerx
+        self.high_score_rect.top = self.high_score_rect.top
 
     def prep_score(self):
         """Transforma a pontuaçao em uma imagem renderiada."""
         rounded_score = int(round(self.stats.score, -1))
         score_str = f"{rounded_score:,}"
-        self.score_image = self.font.render(score_str, True, self.text_color, self.ai_settings.bg_color)
+        self.score_image = self.font.render(score_str, True,
+                                            self.text_color, self.ai_settings.bg_color)
 
         # Exibe a pontuaçao na parte superior direita da tela
         self.score_rect = self.score_image.get_rect()

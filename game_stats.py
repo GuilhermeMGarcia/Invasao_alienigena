@@ -6,6 +6,9 @@ class Game_Stats():
         self.ai_settings = ai_settings
         self.reset_stats()
 
+        # A pontuaçao maxima jamais devera ser reiniciada
+        self.high_score = 0
+
         # Inicia a Invasao Alienigena em um estado ativo
         self.game_active = False
 
