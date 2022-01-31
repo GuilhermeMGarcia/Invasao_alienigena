@@ -21,10 +21,13 @@ class Settings():
 
         # Configuraçao dos alienigena
         self.fleet_drop_speed = 10
+        self.sound_explosion = "sound/sounds_shipexplosion.wav"
 
         # A taxa com que a velocidade do jogo aumenta
         self.speedup_scale = 1.1
-        self.sound_explosion = "sound/sounds_shipexplosion.wav"
+
+        # A taxa com que os pontos para cada alienigena aumentam
+        self.score_scale = 1.5
 
         self.initialize_dynamic_settings()
 
@@ -38,10 +41,12 @@ class Settings():
         self.fleet_direction = 1
 
         # Pontuaçao
-        self.alien_points = 50
+        self.alien_points = 500
 
     def increase_speed(self):
-        """Aumenta as configuraçoes de velocidade"""
+        """Aumenta as configuraçoes de velocidade e os pontos para cada alienigena."""
         self.ship_speed_factor *= self.speedup_scale
         self.bullet_speed_factor += self.speedup_scale
         self.alien_speed_factor *= self.speedup_scale
+
+        self.alien_points = int(self.alien_points * self.score_scale)
