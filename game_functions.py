@@ -113,6 +113,7 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, 
         for aliens in collisions.values():
             stats.score += ai_settings.alien_points * len(aliens)
             sb.prep_score()
+        check_high_score(stats, sb)
 
     if len(aliens) == 0:
         # Destroi os projeteis existentes e cria uma nova frota
@@ -244,3 +245,10 @@ def son_explosion(son):
     """Carrega um son de explosao para nave alienigena"""
     pygame.mixer.music.load(son)
     pygame.mixer.music.play()
+
+
+def check_high_score(stats, sb):
+    """Verifica se ha uma nova pontuaçao maxima."""
+    if stats.score > stats.high_score:
+        stats.high_score = stats.score
+        sb.prep_high_score()
