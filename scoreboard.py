@@ -51,7 +51,7 @@ class Scoreboard():
 
         # Exibe a pontuaçao na parte superior direita da tela
         self.level_rect = self.level_image.get_rect()
-        self.level_rect.right = self.score_rect.right + 65
+        self.level_rect.right = self.score_rect.right + 75
         self.level_rect.top = 20
 
     def show_score(self):
